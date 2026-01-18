@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Countdown</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body>
+
+<div id="pages">
+
+  <!-- 5 Countdown-Seiten -->
+  <div class="page" data-index="0"></div>
+  <div class="page" data-index="1"></div>
+  <div class="page" data-index="2"></div>
+  <div class="page" data-index="3"></div>
+  <div class="page" data-index="4"></div>
+
+</div>
+
+<!-- Seitendots -->
+<div id="pageDots" aria-label="Seiten"></div>
+
+<!-- Einstellungen-Button -->
+<button id="settingsBtn">Einstellungen</button>
+
+<!-- Dialog -->
+<div id="settingsDialog" class="dialog hidden">
+  <div class="dialog-content">
+
+    <h2>Countdown einstellen</h2>
+
+    <label>Titel</label>
+    <input id="titleInput" type="text" />
+
+    <label>Datum</label>
+    <input id="dateInput" type="date" />
+
+    <label>Hintergrund wählen</label>
+    <input id="imageInput" type="file" accept="image/*" />
+    <img id="imagePreview" />
+
+    <div class="dialog-buttons">
+      <button id="saveBtn" type="button">Speichern</button>
+      <button id="deleteBtn" type="button">Countdown löschen</button>
+      <button id="closeBtn" type="button">Schließen</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register(
+      "./sw.js",
+      { scope: "./" }
+    );
+  });
+}
+</script>
+
+<!-- Versionsanzeige -->
+<div id="appVersion">V1.7</div>
+
+</body>
+</html>

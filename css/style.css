@@ -1,0 +1,233 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+
+body {
+  background: rgb(38, 81, 198);     /* Hintergrundfarbe bei leerem Countdown */
+  color: rgb(255, 255, 255);        /* Schriftfarbe */
+  overflow: hidden;
+}
+
+#pages {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.page {
+  position: relative;     
+  width: 100vw;
+  height: 100vh;
+  flex: 0 0 100vw;
+
+  scroll-snap-align: start;
+
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* Zieldatum */
+.date {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.title {
+  font-size: 28px;
+  margin-top: 10px;
+}
+
+.days {
+  font-size: 40px;
+  margin-top: 10px;
+}
+
+#settingsBtn {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: none;
+}
+
+.dialog {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog.hidden {
+  display: none;
+}
+
+.dialog-content {
+  background: #fff;
+  color: #000;
+  width: 90%;
+  max-width: 400px;
+
+  max-height: 85vh;          /* ✅ wichtig */
+  overflow-y: auto;          /* ✅ scrollen erlauben */
+
+  padding: 20px;
+  border-radius: 12px;
+
+  -webkit-overflow-scrolling: touch; /* iOS smooth scroll */
+}
+
+.dialog-content label {
+  display: block;
+  margin-top: 15px;
+}
+
+.dialog-content input {
+  width: 100%;
+  padding: 8px;
+}
+
+input,
+textarea,
+select,
+button {
+  font-size: 16px;
+}
+
+#imagePreview {
+  width: 100%;
+  max-height: 200px;        /* ✅ Bild bleibt klein */
+  object-fit: contain;     /* ✅ vollständig sichtbar */
+  margin-top: 10px;
+  border-radius: 8px;
+  background: #eee;
+}
+
+.dialog-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dialog-buttons {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding-top: 10px;
+}
+
+#pageDots {
+  position: fixed;
+  left: 50%;
+  bottom: 70px;                 /* über dem Einstellungen-Button */
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 50;
+}
+
+/* Seitendots */
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.45);
+  border: 0;
+  padding: 0;
+}
+
+.dot.active {
+  background: rgba(255,255,255,0.95);
+}
+
+.dialog,
+.dialog * {
+  touch-action: manipulation; /* verhindert Swipe im Dialog */
+}
+
+#appVersion {
+  position: fixed;
+  top: env(safe-area-inset-top, 10px);
+  right: 10px;
+
+  font-size: 12px;
+  opacity: 0.6;
+
+  background: rgba(0,0,0,0.4);
+  color: white;
+
+  padding: 4px 8px;
+  border-radius: 8px;
+
+  z-index: 1000;
+  pointer-events: none; /* blockiert keine Klicks */
+}
+
+/* Info-Fenster links oben */
+.info-box {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 70px);
+  left: 0px;
+
+  padding: 12px 14px;
+  border-radius: 12px;
+
+  color: #000;
+  max-width: 85%;
+
+  z-index: 1;
+}
+
+/* Glas-Hintergrund (nur Hintergrund, nicht Text!) */
+.info-box::before {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);    
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(240, 240, 240, 0.35); /* echte Transparenz */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-radius: 12px;
+  z-index: -1;
+}
+
+/* Inhalt im Fenster */
+.info-box .date {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.info-box .title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.info-box .days {
+  font-size: 36px;
+  font-weight: 600;
+  margin-top: 6px;
+}
